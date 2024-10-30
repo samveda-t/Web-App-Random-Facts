@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useless Fact App</title>
+    <script>
+        async function fetchFact() {
+            try {
+                const response = await fetch('/get_fact');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                document.getElementById('factContainer').innerText = data.fact;
+            } catch (error) {
+                console.error("Error fetching the fact:", error);
+                document.getElementById('factContainer').innerText = "Failed to fetch a useless fact. Please try again.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Get a Useless Fact</h1>
+    <button onclick="fetchFact()">Press me for a useless fact</button>
+    <p id="factContainer"></p>
+</body>
+</html>
